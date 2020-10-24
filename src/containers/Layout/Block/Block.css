@@ -1,0 +1,21 @@
+.Block {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  width: 100%;
+
+  padding: 4px 6px;
+}
+
+.TodoList {
+  min-height: 200px;
+  max-height: 35vh;
+  overflow: auto;
+}
+
+.NewTodoContainer {
+  padding: 5px 0px;
+}
+
+.NewTodoContainer .AddButton {
+  cursor: pointer;
+}

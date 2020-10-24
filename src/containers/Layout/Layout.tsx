@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { Container, Row, Col } from 'reactstrap';
 
+import Block from './Block/Block';
+
 import './Layout.css';
 
 const Layout: React.FC = () => {
@@ -11,7 +13,9 @@ const Layout: React.FC = () => {
     <>
       <Container>
         <Row>
-          <div onClick={() => setShowList(!showList)}>toggle</div>
+          <div onClick={() => setShowList(!showList)} style={{ textAlign: 'right' }}>
+            Toggle List
+          </div>
         </Row>
         <Row>
           {showList && (
@@ -24,22 +28,20 @@ const Layout: React.FC = () => {
             <Row className="Label HorizontalLabel High">High Importance</Row>
             <div className="BlockWrapper">
               <div className="Label VerticalLabel High">High Urgency</div>
-              <div className="Block"></div>
+              <Block important={true} urgent={true} />
             </div>
             <div className="BlockWrapper">
               <div className="Label VerticalLabel Low">Low Urgency</div>
-              <div className="Block"></div>
+              <Block important={true} urgent={false} />
             </div>
           </Col>
           <Col className="col" xs={{ size: 6, order: 2 }} sm={{ size: showList ? 5 : 6, order: 3 }}>
             <Row className="Label HorizontalLabel Low">Low Importance</Row>
             <div className="BlockWrapper">
-              <div className="Block"></div>
-              {/* <div className="Label VerticalLabel High">&nbsp;</div> */}
+              <Block important={false} urgent={true} />
             </div>
             <div className="BlockWrapper">
-              <div className="Block"></div>
-              {/* <div className="Label VerticalLabel Low">&nbsp;</div> */}
+              <Block important={false} urgent={false} />
             </div>
           </Col>
         </Row>
