@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 
 import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 
-import TodoItem from './TodoItem/TodoItem';
+import TodoItem from '../TodoItem/TodoItem';
 
 import TodosContext from '../../../contexts/todos-context';
 
@@ -39,7 +39,15 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
   };
 
   return (
-    <div className="Block">
+    <div
+      className={[
+        'Block',
+        important && urgent ? 'SecondQuadrant' : null,
+        !important && urgent ? 'FirstQuadrant' : null,
+        important && !urgent ? 'ThirdQuadrant' : null,
+        !important && !urgent ? 'FourthQuadrant' : null,
+      ].join(' ')}
+    >
       <div className="TodoList">
         {todos
           .filter((item) => item.important === important && item.urgent === urgent)

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
 import Block from './Block/Block';
+import List from './List/List';
 
 import './Layout.css';
 
@@ -13,18 +14,28 @@ const Layout: React.FC = () => {
     <>
       <Container>
         <Row>
-          <div onClick={() => setShowList(!showList)} style={{ textAlign: 'right' }}>
+          <div
+            onClick={() => setShowList(!showList)}
+            style={{
+              width: '100%',
+              textAlign: 'right',
+              cursor: 'pointer',
+              fontSize: '0.9rem',
+              fontStyle: 'italic',
+              userSelect: 'none',
+            }}
+          >
             Toggle List
           </div>
         </Row>
         <Row>
           {showList && (
-            <Col className="col" xs={{ size: 12, order: 'last' }} md={{ size: 2, order: 'first' }}>
-              list
+            <Col className="col" xs={{ size: 12, order: 'last' }} md={{ size: 3, order: 'first' }}>
+              <List />
             </Col>
           )}
 
-          <Col xs={{ size: 12, order: 1 }} md={{ size: showList ? 10 : 12, order: 2 }}>
+          <Col xs={{ size: 12, order: 1 }} md={{ size: showList ? 9 : 12, order: 2 }}>
             <div className="Row">
               <div className="Label VerticalLabel High">High Urgency</div>
               <div className="SubRow">

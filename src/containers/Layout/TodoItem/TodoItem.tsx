@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Todo } from '../../../../shared/interfaces';
+import { Todo } from '../../../shared/interfaces';
 
-import TodosContext from '../../../../contexts/todos-context';
+import TodosContext from '../../../contexts/todos-context';
 
 import './TodoItem.css';
 

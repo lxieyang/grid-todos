@@ -1,0 +1,9 @@
+.List {
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.NoTodos {
+  font-style: italic;
+  color: gray;
+}
