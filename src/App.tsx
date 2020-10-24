@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import NavBar from './containers/NavBar/NavBar';
@@ -11,6 +11,20 @@ import './App.css';
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    const todosInStorage = localStorage.getItem('todos');
+    if (!todosInStorage) {
+      localStorage.setItem('todos', JSON.stringify([]));
+    } else {
+      let todoList = JSON.parse(todosInStorage) as Todo[];
+      setTodos(todoList);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const addNewTodo = (name: string, important: boolean, urgent: boolean) => {
     let todo: Todo = {
