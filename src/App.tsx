@@ -13,7 +13,6 @@ const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addNewTodo = (name: string, important: boolean, urgent: boolean) => {
-    console.log(name, important, urgent);
     let todo: Todo = {
       id: uuid(),
       name,

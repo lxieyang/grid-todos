@@ -19,29 +19,36 @@ const Layout: React.FC = () => {
         </Row>
         <Row>
           {showList && (
-            <Col className="col" xs={{ size: 12, order: 'last' }} sm={{ size: 2, order: 'first' }}>
+            <Col className="col" xs={{ size: 12, order: 'last' }} md={{ size: 2, order: 'first' }}>
               list
             </Col>
           )}
 
-          <Col className="col" xs={{ size: 6, order: 1 }} sm={{ size: showList ? 5 : 6, order: 2 }}>
-            <Row className="Label HorizontalLabel High">High Importance</Row>
-            <div className="BlockWrapper">
+          <Col xs={{ size: 12, order: 1 }} md={{ size: showList ? 10 : 12, order: 2 }}>
+            <div className="Row">
               <div className="Label VerticalLabel High">High Urgency</div>
-              <Block important={true} urgent={true} />
+              <div className="SubRow">
+                <div className="BlockWrapper">
+                  <div className="Label HorizontalLabel High">High Importance</div>
+                  <Block important={true} urgent={true} />
+                </div>
+                <div className="BlockWrapper">
+                  <div className="Label HorizontalLabel High">Low Importance</div>
+                  <Block important={false} urgent={true} />
+                </div>
+              </div>
             </div>
-            <div className="BlockWrapper">
-              <div className="Label VerticalLabel Low">Low Urgency</div>
-              <Block important={true} urgent={false} />
-            </div>
-          </Col>
-          <Col className="col" xs={{ size: 6, order: 2 }} sm={{ size: showList ? 5 : 6, order: 3 }}>
-            <Row className="Label HorizontalLabel Low">Low Importance</Row>
-            <div className="BlockWrapper">
-              <Block important={false} urgent={true} />
-            </div>
-            <div className="BlockWrapper">
-              <Block important={false} urgent={false} />
+
+            <div className="Row">
+              <div className="Label VerticalLabel High">High Urgency</div>
+              <div className="SubRow">
+                <div className="BlockWrapper">
+                  <Block important={true} urgent={false} />
+                </div>
+                <div className="BlockWrapper">
+                  <Block important={false} urgent={false} />
+                </div>
+              </div>
             </div>
           </Col>
         </Row>
