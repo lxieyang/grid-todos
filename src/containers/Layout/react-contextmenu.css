@@ -41,6 +41,14 @@
   text-decoration: none;
 }
 
+.delete.react-contextmenu-item.react-contextmenu-item--active,
+.delete.react-contextmenu-item.react-contextmenu-item--selected {
+  color: #fff;
+  background-color: #ff4120;
+  border-color: #ff4120;
+  text-decoration: none;
+}
+
 .react-contextmenu-item.react-contextmenu-item--disabled,
 .react-contextmenu-item.react-contextmenu-item--disabled:hover {
   background-color: transparent;

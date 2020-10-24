@@ -12,3 +12,14 @@
 .TodoItem:first-child {
   margin-top: 4px;
 }
+
+.TodoItem.Completed {
+  text-decoration: line-through;
+  font-style: italic;
+  opacity: 0.5;
+  transition: 0.1s ease-in;
+}
+
+.TodoItem.Completed:hover {
+  opacity: 0.8;
+}

@@ -13,7 +13,7 @@ interface Props {
 }
 
 const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
-  const { renameTodo, deleteTodo } = useContext(TodosContext);
+  const { renameTodo, deleteTodo, toggleTodoCompleteStatus } = useContext(TodosContext);
 
   const [todoName, setTodoName] = useState<string>(todo.name);
 
@@ -44,15 +44,18 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
   };
 
   const handleDelete = () => {
-    console.log(todo.id);
     deleteTodo(todo.id);
+  };
+
+  const handleComplete = () => {
+    toggleTodoCompleteStatus(todo.id);
   };
 
   return (
     <>
       <ContextMenuTrigger id={`${todo.id}-${fromAllList}`}>
         <input
-          className="TodoItem"
+          className={['TodoItem', todo.completed ? 'Completed' : null].join(' ')}
           onChange={handleInput}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
@@ -61,7 +64,11 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
       </ContextMenuTrigger>
 
       <ContextMenu id={`${todo.id}-${fromAllList}`}>
-        <MenuItem onClick={() => handleDelete()}>Delete</MenuItem>
+        <MenuItem onClick={() => handleComplete()}>{todo.completed ? 'Un-complete' : 'Mark as completed'}</MenuItem>
+        <MenuItem divider />
+        <MenuItem onClick={() => handleDelete()} className="delete">
+          Delete
+        </MenuItem>
       </ContextMenu>
     </>
   );
