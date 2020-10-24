@@ -11,10 +11,12 @@ const List: React.FC = () => {
 
   return (
     <div className="List">
-      {todos.map((item, idx) => {
-        return <TodoItem key={idx} todo={item} />;
-      })}
-      {todos.length === 0 && <div className="NoTodos">no todos</div>}
+      {todos
+        .filter((item) => !item.trashed)
+        .map((item, idx) => {
+          return <TodoItem key={idx} todo={item} fromAllList={true} />;
+        })}
+      {todos.filter((item) => !item.trashed).length === 0 && <div className="NoTodos">no todos</div>}
     </div>
   );
 };

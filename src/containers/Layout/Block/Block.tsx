@@ -50,9 +50,9 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
     >
       <div className="TodoList">
         {todos
-          .filter((item) => item.important === important && item.urgent === urgent)
+          .filter((item) => item.important === important && item.urgent === urgent && !item.trashed)
           .map((item, idx) => {
-            return <TodoItem key={idx} todo={item} />;
+            return <TodoItem key={idx} todo={item} fromAllList={false} />;
           })}
       </div>
       <div className="NewTodoContainer">

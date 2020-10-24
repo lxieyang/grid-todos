@@ -3,14 +3,17 @@ import { Todo } from '../../../shared/interfaces';
 
 import TodosContext from '../../../contexts/todos-context';
 
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+
 import './TodoItem.css';
 
 interface Props {
   todo: Todo;
+  fromAllList: boolean;
 }
 
-const TodoItem: React.FC<Props> = ({ todo }: Props) => {
-  const { renameTodo } = useContext(TodosContext);
+const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
+  const { renameTodo, deleteTodo } = useContext(TodosContext);
 
   const [todoName, setTodoName] = useState<string>(todo.name);
 
@@ -40,8 +43,27 @@ const TodoItem: React.FC<Props> = ({ todo }: Props) => {
     }
   };
 
+  const handleDelete = () => {
+    console.log(todo.id);
+    deleteTodo(todo.id);
+  };
+
   return (
-    <input className="TodoItem" onChange={handleInput} onBlur={handleBlur} onKeyDown={handleKeyDown} value={todoName} />
+    <>
+      <ContextMenuTrigger id={`${todo.id}-${fromAllList}`}>
+        <input
+          className="TodoItem"
+          onChange={handleInput}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          value={todoName}
+        />
+      </ContextMenuTrigger>
+
+      <ContextMenu id={`${todo.id}-${fromAllList}`}>
+        <MenuItem onClick={() => handleDelete()}>Delete</MenuItem>
+      </ContextMenu>
+    </>
   );
 };
 

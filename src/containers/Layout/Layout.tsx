@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'reactstrap';
 import Block from './Block/Block';
 import List from './List/List';
 
+import './react-contextmenu.css';
 import './Layout.css';
 
 const Layout: React.FC = () => {
