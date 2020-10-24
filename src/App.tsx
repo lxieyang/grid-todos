@@ -37,6 +37,11 @@ const App: React.FC = () => {
     setTodos(list);
   };
 
+  const deleteTodoForever = (id: string) => {
+    let list = [...todos].filter((item) => item.id !== id);
+    setTodos(list);
+  };
+
   const renameTodo = (id: string, newName: string) => {
     let list = [...todos].map((item) => {
       if (item.id === id) {
@@ -75,6 +80,7 @@ const App: React.FC = () => {
           todos,
           addNewTodo,
           deleteTodo,
+          deleteTodoForever,
           renameTodo,
           moveTodo,
           toggleTodoCompleteStatus,

@@ -3,6 +3,18 @@
   overflow: auto;
 }
 
+.ListLabel {
+  font-style: italic;
+}
+
+.ListLabel.Active {
+  background-color: lightblue;
+}
+
+.ListLabel.Trashed {
+  background-color: lightgray;
+}
+
 .NoTodos {
   font-style: italic;
   color: gray;
