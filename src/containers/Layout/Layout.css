@@ -1,0 +1,48 @@
+.row {
+}
+
+.col {
+  padding: 6px;
+}
+
+.BlockWrapper {
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Label {
+  font-weight: bold;
+}
+
+.HorizontalLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.VerticalLabel {
+  flex-shrink: 0;
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.High {
+  opacity: 1;
+}
+
+.Low {
+  opacity: 0.5;
+}
+
+.Block {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 200px;
+  max-height: 40vh;
+}
