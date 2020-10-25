@@ -52,14 +52,14 @@ const Layout: React.FC = () => {
                   <Block important={true} urgent={true} />
                 </div>
                 <div className="BlockWrapper">
-                  <div className="Label HorizontalLabel High">Low Importance</div>
+                  <div className="Label HorizontalLabel Low">Low Importance</div>
                   <Block important={false} urgent={true} />
                 </div>
               </div>
             </div>
 
             <div className="Row">
-              <div className="Label VerticalLabel High">High Urgency</div>
+              <div className="Label VerticalLabel Low">Low Urgency</div>
               <div className="SubRow">
                 <div className="BlockWrapper">
                   <Block important={true} urgent={false} />
