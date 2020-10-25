@@ -23,10 +23,11 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     type: ItemTypes.TODO,
   };
 
-  const [{ opacity }, drag] = useDrag({
+  const [{ opacity, isDragging }, drag] = useDrag({
     item: dropItem,
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.4 : 1,
+      isDragging: monitor.isDragging(),
     }),
   });
 
@@ -72,7 +73,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
 
   return (
     <>
-      <ContextMenuTrigger id={`${todo.id}-${fromAllList}`}>
+      <ContextMenuTrigger id={`${todo.id}-${fromAllList}`} disable={isDragging} holdToDisplay={-1}>
         <input
           ref={drag}
           className={['TodoItem', todo.completed ? 'Completed' : null].join(' ')}
@@ -83,7 +84,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
         />
       </ContextMenuTrigger>
 
-      <ContextMenu id={`${todo.id}-${fromAllList}`}>
+      <ContextMenu id={`${todo.id}-${fromAllList}`} hideOnLeave={true}>
         <MenuItem onClick={() => handleComplete()}>{todo.completed ? 'Un-complete' : 'Mark as completed'}</MenuItem>
         <MenuItem divider />
         <MenuItem onClick={() => handleDelete()} className="delete">
