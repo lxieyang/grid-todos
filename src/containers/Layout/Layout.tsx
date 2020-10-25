@@ -21,7 +21,9 @@ const Layout: React.FC = () => {
       .get()
       .then((snapshot) => {
         if (snapshot) {
-          setShowList(snapshot.data()?.showList);
+          let shouldShowList = snapshot.data()?.showList;
+          setShowList(shouldShowList);
+          localStorage.setItem('showList', shouldShowList);
         }
       });
   }, []);
