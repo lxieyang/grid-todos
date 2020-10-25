@@ -1,21 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, Row, Col } from 'reactstrap';
 
 import Block from './Block/Block';
 import List from './List/List';
-import { ItemTypes, DropItem } from './ItemTypes';
+
+import { updateListShowStatus, db, DB_COLLECTIONS, getCurrentUser } from '../../firebase';
 
 import './react-contextmenu.css';
 import './Layout.css';
 
 const Layout: React.FC = () => {
-  const [showList, setShowList] = useState<boolean>(true);
+  const [showList, setShowList] = useState<boolean>(
+    localStorage.getItem('showList') ? JSON.parse(localStorage.getItem('showList') as string) : true,
+  );
 
-  const dropAcceptTypes = [ItemTypes.TODO];
+  useEffect(() => {
+    db.collection(DB_COLLECTIONS.USERS)
+      .doc(getCurrentUser()?.uid)
+      .get()
+      .then((snapshot) => {
+        if (snapshot) {
+          setShowList(snapshot.data()?.showList);
+        }
+      });
+  }, []);
 
-  const handleDrop = (item: DropItem) => {
-    console.log(item);
+  const handleToggleList = (to: boolean) => {
+    setShowList(to);
+    updateListShowStatus(to);
+    localStorage.setItem('showList', JSON.stringify(to));
   };
 
   return (
@@ -23,7 +37,7 @@ const Layout: React.FC = () => {
       <Container>
         <Row>
           <div
-            onClick={() => setShowList(!showList)}
+            onClick={() => handleToggleList(!showList)}
             style={{
               width: '100%',
               textAlign: 'right',
