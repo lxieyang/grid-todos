@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Container, Button, FormGroup, Label, Input } from 'reactstrap';
 
-import firebase, { signInWithEmailAndPassword, signOut } from '../../firebase';
+import firebase, { signInWithEmailAndPassword, signUpWithEmailAndPassword, signOut } from '../../firebase';
 
 import './Auth.css';
 
@@ -14,8 +14,12 @@ const Auth: React.FC<Props> = ({ user }: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleSignIn = () => {
+  const handleLogIn = () => {
     signInWithEmailAndPassword(email.trim(), password.trim());
+  };
+
+  const handleSignUp = () => {
+    signUpWithEmailAndPassword(email.trim(), password.trim());
   };
 
   const handleSignOut = () => {
@@ -71,7 +75,13 @@ const Auth: React.FC<Props> = ({ user }: Props) => {
                 />
               </FormGroup>
               <FormGroup>
-                <Button onClick={handleSignIn}>Sign in</Button>
+                <Button onClick={handleSignUp} color="primary">
+                  Sign up
+                </Button>
+                &nbsp;&nbsp;&nbsp;
+                <Button onClick={handleLogIn} color="secondary">
+                  Log in
+                </Button>
               </FormGroup>
             </>
           )}

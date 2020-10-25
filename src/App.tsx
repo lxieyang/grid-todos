@@ -40,6 +40,7 @@ const App: React.FC = () => {
         setUpTodosListener();
       } else {
         if (unsubscribeTodos) unsubscribeTodos();
+        setTodos([]);
       }
     });
 
