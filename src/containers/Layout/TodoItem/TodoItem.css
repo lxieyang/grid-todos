@@ -10,7 +10,6 @@
   border-style: solid;
   border-radius: 5px;
 
-  padding: 2px 4px;
   margin: 4px 0px;
 
   background-color: #fff;
@@ -37,19 +36,21 @@
 .TodoItem input,
 .TodoItem textarea {
   flex: 1;
+  padding: 2px 6px;
+  border-radius: 5px;
   border: none;
 }
 
 .TodoItem input:focus,
 .TodoItem textarea:focus {
-  outline: none;
+  /* outline: none; */
 }
 
 .QuadrantIndicator {
   flex-shrink: 0;
   width: 1.4rem;
   height: 1.4rem;
-
+  margin-left: 0.25rem;
   cursor: move;
 }
 
