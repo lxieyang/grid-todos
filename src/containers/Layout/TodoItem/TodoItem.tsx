@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useDrag } from 'react-dnd';
+import Textarea from 'react-autosize-textarea';
 
 import { ItemTypes, DropItem } from '../ItemTypes';
 import { Todo } from '../../../shared/interfaces';
@@ -23,10 +24,9 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     type: ItemTypes.TODO,
   };
 
-  const [{ opacity, isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag({
     item: dropItem,
     collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0.4 : 1,
       isDragging: monitor.isDragging(),
     }),
   });
@@ -37,7 +37,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     setTodoName(todo.name);
   }, [todo.name]);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTodoName(e.target.value);
   };
 
@@ -52,7 +52,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     submitNewName();
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       submitNewName();
       e.currentTarget.blur();
@@ -74,14 +74,22 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
   return (
     <>
       <ContextMenuTrigger id={`${todo.id}-${fromAllList}`} disable={isDragging} holdToDisplay={-1}>
-        <input
-          ref={drag}
+        <div
           className={['TodoItem', todo.completed ? 'Completed' : null].join(' ')}
-          onChange={handleInput}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          value={todoName}
-        />
+          ref={drag}
+          style={{ opacity: isDragging ? 0.5 : 1 }}
+        >
+          <Textarea
+            onChange={(e) => handleInput(e as React.ChangeEvent<HTMLTextAreaElement>)}
+            onBlur={handleBlur}
+            onKeyDown={handleKeyDown}
+            value={todoName}
+            rows={1}
+            maxRows={5}
+            style={{ resize: 'none', cursor: isDragging ? 'move' : '' }}
+          />
+          {fromAllList && <div className="QuadrantIndicator">123</div>}
+        </div>
       </ContextMenuTrigger>
 
       <ContextMenu id={`${todo.id}-${fromAllList}`} hideOnLeave={true}>

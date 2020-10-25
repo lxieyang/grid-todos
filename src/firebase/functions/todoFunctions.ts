@@ -49,6 +49,7 @@ export const moveTodoById = (id: string, important: boolean, urgent: boolean) =>
   getTodoById(id).update({
     important,
     urgent,
+    trashed: false,
   });
 };
 

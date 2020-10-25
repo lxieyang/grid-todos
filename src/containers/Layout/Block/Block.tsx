@@ -6,6 +6,7 @@ import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 import TodoItem from '../TodoItem/TodoItem';
 
 import TodosContext from '../../../contexts/todos-context';
+import { colors } from '../../../shared/constants';
 import { ItemTypes, DropItem } from '../ItemTypes';
 
 import './Block.css';
@@ -58,13 +59,19 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
   return (
     <div
       ref={drop}
-      className={[
-        'Block',
-        important && urgent ? 'SecondQuadrant' : null,
-        !important && urgent ? 'FirstQuadrant' : null,
-        important && !urgent ? 'ThirdQuadrant' : null,
-        !important && !urgent ? 'FourthQuadrant' : null,
-      ].join(' ')}
+      className="Block"
+      style={{
+        backgroundColor:
+          important && urgent
+            ? colors.SecondQuadrant
+            : !important && urgent
+            ? colors.FirstQuadrant
+            : important && !urgent
+            ? colors.ThirdQuadrant
+            : !important && !urgent
+            ? colors.FourthQuadrant
+            : undefined,
+      }}
     >
       <div className="TodoList">
         {todos

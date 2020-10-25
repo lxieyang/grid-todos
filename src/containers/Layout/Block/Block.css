@@ -23,19 +23,3 @@
 .NewTodoContainer .AddButton {
   cursor: pointer;
 }
-
-.FirstQuadrant {
-  background-color: #dde253be;
-}
-
-.SecondQuadrant {
-  background-color: #89e360be;
-}
-
-.ThirdQuadrant {
-  background-color: #f7f6b2be;
-}
-
-.FourthQuadrant {
-  background-color: #f1efdabe;
-}

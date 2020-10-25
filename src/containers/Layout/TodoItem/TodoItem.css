@@ -7,6 +7,11 @@
 
   padding: 2px 4px;
   margin: 4px 0px;
+
+  background-color: #fff;
+
+  display: flex;
+  align-items: center;
 }
 
 .TodoItem:first-child {
@@ -22,4 +27,19 @@
 
 .TodoItem.Completed:hover {
   opacity: 0.8;
+}
+
+.TodoItem input,
+.TodoItem textarea {
+  flex: 1;
+  border: none;
+}
+
+.TodoItem input:focus,
+.TodoItem textarea:focus {
+  outline: none;
+}
+
+.QuadrantIndicator {
+  flex-shrink: 0;
 }
