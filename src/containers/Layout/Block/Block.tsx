@@ -9,6 +9,9 @@ import TodosContext from '../../../contexts/todos-context';
 import { colors } from '../../../shared/constants';
 import { ItemTypes, DropItem } from '../ItemTypes';
 
+// @ts-ignore
+import α from 'color-alpha';
+
 import './Block.css';
 
 interface Props {
@@ -52,8 +55,21 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleAddTodo();
-      // e.currentTarget.blur();
     }
+  };
+
+  const getBackgroundColor = () => {
+    let bgColor =
+      important && urgent
+        ? colors.SecondQuadrant
+        : !important && urgent
+        ? colors.FirstQuadrant
+        : important && !urgent
+        ? colors.ThirdQuadrant
+        : !important && !urgent
+        ? colors.FourthQuadrant
+        : undefined;
+    return α(bgColor, 0.7);
   };
 
   return (
@@ -61,16 +77,8 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
       ref={drop}
       className="Block"
       style={{
-        backgroundColor:
-          important && urgent
-            ? colors.SecondQuadrant
-            : !important && urgent
-            ? colors.FirstQuadrant
-            : important && !urgent
-            ? colors.ThirdQuadrant
-            : !important && !urgent
-            ? colors.FourthQuadrant
-            : undefined,
+        backgroundColor: getBackgroundColor(),
+        borderColor: isActive ? 'black' : undefined,
       }}
     >
       <div className="TodoList">

@@ -4,6 +4,7 @@ import Textarea from 'react-autosize-textarea';
 
 import { ItemTypes, DropItem } from '../ItemTypes';
 import { Todo } from '../../../shared/interfaces';
+import { colors } from '../../../shared/constants';
 
 import TodosContext from '../../../contexts/todos-context';
 
@@ -71,6 +72,8 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     deleteTodoForever(todo.id);
   };
 
+  const { important, urgent } = todo;
+
   return (
     <>
       <ContextMenuTrigger id={`${todo.id}-${fromAllList}`} disable={isDragging} holdToDisplay={-1}>
@@ -88,7 +91,30 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
             maxRows={5}
             style={{ resize: 'none', cursor: isDragging ? 'move' : '' }}
           />
-          {fromAllList && <div className="QuadrantIndicator">123</div>}
+          {fromAllList && (
+            <div className="QuadrantIndicator">
+              <div className="QuadrantGroup">
+                <div
+                  className="Quadrant Second"
+                  style={{ backgroundColor: important && urgent ? colors.SecondQuadrant : undefined }}
+                ></div>
+                <div
+                  className="Quadrant First"
+                  style={{ backgroundColor: !important && urgent ? colors.FirstQuadrant : undefined }}
+                ></div>
+              </div>
+              <div className="QuadrantGroup">
+                <div
+                  className="Quadrant Third"
+                  style={{ backgroundColor: important && !urgent ? colors.ThirdQuadrant : undefined }}
+                ></div>
+                <div
+                  className="Quadrant Fourth"
+                  style={{ backgroundColor: !important && !urgent ? colors.FourthQuadrant : undefined }}
+                ></div>
+              </div>
+            </div>
+          )}
         </div>
       </ContextMenuTrigger>
 

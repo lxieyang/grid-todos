@@ -16,6 +16,7 @@
     "@types/reactstrap": "^8.5.2",
     "@types/uuid": "^8.3.0",
     "bootstrap": "^4.5.3",
+    "color-alpha": "^1.1.2",
     "firebase": "^7.24.0",
     "moment": "^2.29.1",
     "react": "^17.0.1",

@@ -1,3 +1,8 @@
+:root {
+  --quadrant-indictor-border-color: lightgray;
+  --quadrant-indictor-background-color: rgba(211, 211, 211, 0.185);
+}
+
 .TodoItem {
   width: 100%;
   border-color: lightgray;
@@ -42,4 +47,40 @@
 
 .QuadrantIndicator {
   flex-shrink: 0;
+  width: 1.4rem;
+  height: 1.4rem;
+
+  cursor: move;
 }
+
+.QuadrantIndicator .QuadrantGroup {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.QuadrantIndicator .QuadrantGroup .Quadrant {
+  border-width: 1px;
+  border-color: transparent;
+  border-style: solid;
+  width: 50%;
+  height: 100%;
+  background-color: var(--quadrant-indictor-background-color);
+}
+
+/* .Quadrant.Second {
+  border-right-color: var(--quadrant-indictor-border-color) !important;
+}
+
+.Quadrant.First {
+  border-bottom-color: var(--quadrant-indictor-border-color) !important;
+}
+
+.Quadrant.Third {
+  border-top-color: var(--quadrant-indictor-border-color) !important;
+}
+
+.Quadrant.Fourth {
+  border-left-color: var(--quadrant-indictor-border-color) !important;
+} */
