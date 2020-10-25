@@ -48,7 +48,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
   };
 
   const handleComplete = () => {
-    toggleTodoCompleteStatus(todo.id);
+    toggleTodoCompleteStatus(todo.id, todo.completed);
   };
 
   const handleDeleteForever = () => {

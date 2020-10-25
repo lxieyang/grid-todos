@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink as Link } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import moment from 'moment';
 
 import { APP_NAME_FULL } from '../../shared/constants';
 
@@ -24,7 +25,7 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
         <Nav className="mr-auto" navbar>
           <NavItem active>
             <Link className="nav-link" to="/">
-              Today
+              Today ({moment().format('MMMM Do, YYYY')})
             </Link>
           </NavItem>
           {/* <NavItem>

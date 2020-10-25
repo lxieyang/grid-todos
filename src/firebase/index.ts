@@ -11,3 +11,4 @@ export const getCurrentUser = () => auth.currentUser;
 
 export default firebase;
 export * from './functions/userFunctions';
+export * from './functions/todoFunctions';
