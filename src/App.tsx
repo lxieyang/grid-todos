@@ -18,6 +18,7 @@ import firebase, {
   deleteTodoById,
   deleteTodoForeverById,
   renameTodoById,
+  moveTodoById,
   toggleTodoCompleteStatusById,
 } from './firebase';
 
@@ -124,14 +125,16 @@ const App: React.FC = () => {
   };
 
   const moveTodo = (id: string, important: boolean, urgent: boolean) => {
-    let list = [...todos].map((item) => {
-      if (item.id === id) {
-        item.important = important;
-        item.urgent = urgent;
-      }
-      return item;
-    });
-    setTodos(list);
+    moveTodoById(id, important, urgent);
+
+    // let list = [...todos].map((item) => {
+    //   if (item.id === id) {
+    //     item.important = important;
+    //     item.urgent = urgent;
+    //   }
+    //   return item;
+    // });
+    // setTodos(list);
   };
 
   const toggleTodoCompleteStatus = (id: string, from: boolean) => {

@@ -4,12 +4,19 @@ import { Container, Row, Col } from 'reactstrap';
 
 import Block from './Block/Block';
 import List from './List/List';
+import { ItemTypes, DropItem } from './ItemTypes';
 
 import './react-contextmenu.css';
 import './Layout.css';
 
 const Layout: React.FC = () => {
   const [showList, setShowList] = useState<boolean>(true);
+
+  const dropAcceptTypes = [ItemTypes.TODO];
+
+  const handleDrop = (item: DropItem) => {
+    console.log(item);
+  };
 
   return (
     <>

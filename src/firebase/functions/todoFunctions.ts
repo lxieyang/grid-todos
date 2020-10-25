@@ -45,6 +45,13 @@ export const renameTodoById = (id: string, name: string) => {
   });
 };
 
+export const moveTodoById = (id: string, important: boolean, urgent: boolean) => {
+  getTodoById(id).update({
+    important,
+    urgent,
+  });
+};
+
 export const toggleTodoCompleteStatusById = (id: string, from: boolean) => {
   if (from === false) {
     // mark as completed

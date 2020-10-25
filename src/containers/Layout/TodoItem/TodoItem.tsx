@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useDrag } from 'react-dnd';
+
+import { ItemTypes, DropItem } from '../ItemTypes';
 import { Todo } from '../../../shared/interfaces';
 
 import TodosContext from '../../../contexts/todos-context';
@@ -14,6 +17,18 @@ interface Props {
 
 const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
   const { renameTodo, deleteTodo, toggleTodoCompleteStatus, deleteTodoForever } = useContext(TodosContext);
+
+  let dropItem: DropItem = {
+    id: todo.id,
+    type: ItemTypes.TODO,
+  };
+
+  const [{ opacity }, drag] = useDrag({
+    item: dropItem,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.4 : 1,
+    }),
+  });
 
   const [todoName, setTodoName] = useState<string>(todo.name);
 
@@ -59,6 +74,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     <>
       <ContextMenuTrigger id={`${todo.id}-${fromAllList}`}>
         <input
+          ref={drag}
           className={['TodoItem', todo.completed ? 'Completed' : null].join(' ')}
           onChange={handleInput}
           onBlur={handleBlur}
