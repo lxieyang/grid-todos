@@ -23,11 +23,14 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavItem active>
-            <Link className="nav-link" to="/">
-              Today ({moment().format('MMMM Do, YYYY')})
-            </Link>
-          </NavItem>
+          {email ? (
+            <NavItem>
+              <Link className="nav-link" to="/">
+                Today ({moment().format('MMMM Do, YYYY')})
+              </Link>
+            </NavItem>
+          ) : null}
+
           {/* <NavItem>
             <Link className="nav-link" to="/">
               Upcoming
@@ -40,7 +43,7 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
           </NavItem> */}
         </Nav>
         <Link to="/auth" className="navbar-text">
-          {email ? email : 'Sign in'}
+          {email ? email : 'Authenticate'}
         </Link>
       </Collapse>
     </Navbar>
