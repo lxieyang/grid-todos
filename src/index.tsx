@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import 'bootstrap/dist//css//bootstrap.min.css';
 import './index.css';
 import App from './App';
@@ -9,9 +11,11 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <DndProvider backend={HTML5Backend}>
-    <App />
-  </DndProvider>,
+  <Router>
+    <DndProvider backend={HTML5Backend}>
+      <App />
+    </DndProvider>
+  </Router>,
   document.getElementById('root'),
 );
 

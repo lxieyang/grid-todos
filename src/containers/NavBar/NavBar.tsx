@@ -1,31 +1,46 @@
 import React, { useState } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import { NavLink as Link } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
 
 import { APP_NAME_FULL } from '../../shared/constants';
 
 import './NavBar.css';
 
-const NavBar: React.FC = () => {
+interface Props {
+  email: string | null;
+}
+
+const NavBar: React.FC<Props> = ({ email }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <Navbar color="light" light expand="md" fixed="top">
-      <NavbarBrand href="/">{APP_NAME_FULL}</NavbarBrand>
+      <Link className="navbar-brand" to="/">
+        {APP_NAME_FULL}
+      </Link>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
           <NavItem active>
-            <NavLink href="/">Today</NavLink>
+            <Link className="nav-link" to="/">
+              Today
+            </Link>
+          </NavItem>
+          {/* <NavItem>
+            <Link className="nav-link" to="/">
+              Upcoming
+            </Link>
           </NavItem>
           <NavItem>
-            <NavLink href="/">Upcoming</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/">History</NavLink>
-          </NavItem>
+            <Link className="nav-link" to="/">
+              History
+            </Link>
+          </NavItem> */}
         </Nav>
-        <NavbarText>User Name</NavbarText>
+        <Link to="/auth" className="navbar-text">
+          {email ? email : 'Sign in'}
+        </Link>
       </Collapse>
     </Navbar>
   );

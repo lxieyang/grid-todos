@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import NavBar from './containers/NavBar/NavBar';
 import Layout from './containers/Layout/Layout';
+import Auth from './containers/Auth/Auth';
 
 import { Todo } from './shared/interfaces';
 import TodosContext from './contexts/todos-context';
 
+import firebase, { auth } from './firebase';
+
 import './App.css';
 
 const App: React.FC = () => {
+  const history = useHistory();
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [user, setUser] = useState<firebase.User | null | undefined>(undefined);
+
+  useEffect(() => {
+    console.log(history);
+    auth.onAuthStateChanged((user: firebase.User | null) => {
+      console.log(user);
+      setUser(user);
+      if (user) {
+        history.push('/');
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const todosInStorage = localStorage.getItem('todos');
@@ -100,9 +117,23 @@ const App: React.FC = () => {
           toggleTodoCompleteStatus,
         }}
       >
-        <NavBar />
+        <NavBar email={user ? user.email : null} />
+
         <div style={{ marginTop: 56 }}>
-          <Layout />
+          <Switch>
+            <Route path="/auth">
+              <Auth user={user} />
+            </Route>
+            {user ? (
+              <>
+                <Route path="/">
+                  <Layout />
+                </Route>
+              </>
+            ) : (
+              <Redirect to="/auth" />
+            )}
+          </Switch>
         </div>
       </TodosContext.Provider>
     </>
