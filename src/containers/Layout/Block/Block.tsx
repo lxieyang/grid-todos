@@ -76,12 +76,12 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
   const getBackgroundText = (): string => {
     if (important && urgent) {
       return 'first'; // ordinal(1);
-    } else if (!important && urgent) {
-      return 'second'; // ordinal(2);
     } else if (important && !urgent) {
-      return ordinal(3);
+      return ordinal(2); // 'second'
+    } else if (!important && urgent) {
+      return 'last'; // ordinal(3);
     } else {
-      return 'last';
+      return 'avoid';
     }
   };
 
