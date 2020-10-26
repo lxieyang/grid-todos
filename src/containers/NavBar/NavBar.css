@@ -1,5 +1,13 @@
 .navbar-brand {
   position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  height: 1.8rem;
+  margin-right: 0.25rem;
 }
 
 .BetaBadge {

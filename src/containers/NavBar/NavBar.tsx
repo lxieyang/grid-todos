@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import { APP_NAME_FULL } from '../../shared/constants';
 import appRoutes from '../../shared/appRoutes';
+import Logo from '../../assets/img/logo.png';
 
 import './NavBar.css';
 
@@ -23,6 +24,7 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
         <Badge color="info" pill className="BetaBadge">
           {/* beta */} β
         </Badge>
+        <img src={Logo} alt="logo" />
         {APP_NAME_FULL}
       </Link>
       <NavbarToggler onClick={toggle} />
