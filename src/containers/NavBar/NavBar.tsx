@@ -20,7 +20,7 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
   return (
     <Navbar color="light" light expand="md" fixed="top">
       <Link className="navbar-brand" to={appRoutes.home}>
-        <Badge color="primary" pill className="BetaBadge">
+        <Badge color="info" pill className="BetaBadge">
           {/* beta */} β
         </Badge>
         {APP_NAME_FULL}
