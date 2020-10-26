@@ -5,6 +5,7 @@ const todosContext = createContext({
   todos: [] as Todo[],
   addNewTodo: (name: string, important: boolean, urgent: boolean) => {},
   deleteTodo: (id: string) => {},
+  reviveTodo: (id: string) => {},
   deleteTodoForever: (id: string) => {},
   renameTodo: (id: string, newName: string) => {},
   moveTodo: (id: string, important: boolean, urgent: boolean) => {},

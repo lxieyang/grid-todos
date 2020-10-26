@@ -8,7 +8,7 @@ import { APP_NAME_FULL } from '../../shared/constants';
 import './NavBar.css';
 
 interface Props {
-  email: string | null;
+  email: string | null | undefined;
 }
 
 const NavBar: React.FC<Props> = ({ email }: Props) => {
@@ -42,9 +42,11 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
             </Link>
           </NavItem> */}
         </Nav>
-        <Link to="/auth" className="navbar-text">
-          {email ? email : 'Authenticate'}
-        </Link>
+        {email !== undefined && (
+          <Link to="/auth" className="navbar-text">
+            {email ? email : 'Authenticate'}
+          </Link>
+        )}
       </Collapse>
     </Navbar>
   );

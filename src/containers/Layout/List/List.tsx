@@ -9,23 +9,23 @@ import './List.css';
 const List: React.FC = () => {
   const { todos } = useContext(TodosContext);
 
+  const activeTodos = todos.filter((item) => !item.trashed);
+
+  const trashedTodos = todos.filter((item) => item.trashed);
+
   return (
     <div className="List">
       <div className="ListLabel Active">Active</div>
-      {todos
-        .filter((item) => !item.trashed)
-        .map((item, idx) => {
-          return <TodoItem key={idx} todo={item} fromAllList={true} />;
-        })}
+      {activeTodos.map((item, idx) => {
+        return <TodoItem key={idx} todo={item} fromAllList={true} />;
+      })}
       {todos.filter((item) => !item.trashed).length === 0 && <div className="NoTodos">no todos</div>}
 
       <br />
       <div className="ListLabel Trashed">Trashed</div>
-      {todos
-        .filter((item) => item.trashed)
-        .map((item, idx) => {
-          return <TodoItem key={idx} todo={item} fromAllList={true} />;
-        })}
+      {trashedTodos.map((item, idx) => {
+        return <TodoItem key={idx} todo={item} fromAllList={true} />;
+      })}
     </div>
   );
 };

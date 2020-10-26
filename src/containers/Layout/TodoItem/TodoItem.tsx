@@ -18,7 +18,7 @@ interface Props {
 }
 
 const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
-  const { renameTodo, deleteTodo, toggleTodoCompleteStatus, deleteTodoForever } = useContext(TodosContext);
+  const { renameTodo, deleteTodo, reviveTodo, toggleTodoCompleteStatus, deleteTodoForever } = useContext(TodosContext);
 
   let dropItem: DropItem = {
     id: todo.id,
@@ -61,7 +61,11 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
   };
 
   const handleDelete = () => {
-    deleteTodo(todo.id);
+    if (todo.trashed) {
+      reviveTodo(todo.id);
+    } else {
+      deleteTodo(todo.id);
+    }
   };
 
   const handleComplete = () => {
@@ -121,7 +125,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
         <MenuItem onClick={() => handleComplete()}>{todo.completed ? 'Un-complete' : 'Mark as completed'}</MenuItem>
         <MenuItem divider />
         <MenuItem onClick={() => handleDelete()} className="delete">
-          Trash
+          {todo.trashed ? 'Un-trash' : 'Trash'}
         </MenuItem>
         {fromAllList && todo.trashed && (
           <>

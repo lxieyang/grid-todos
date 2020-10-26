@@ -34,6 +34,12 @@ export const deleteTodoById = (id: string) => {
   });
 };
 
+export const reviveTodoById = (id: string) => {
+  getTodoById(id).update({
+    trashed: false,
+  });
+};
+
 export const deleteTodoForeverById = (id: string) => {
   getTodoById(id).delete();
 };

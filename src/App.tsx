@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
+import { sortBy, reverse } from 'lodash';
 import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import NavBar from './containers/NavBar/NavBar';
@@ -16,6 +16,7 @@ import firebase, {
   DB_COLLECTIONS,
   createNewTodo,
   deleteTodoById,
+  reviveTodoById,
   deleteTodoForeverById,
   renameTodoById,
   moveTodoById,
@@ -58,6 +59,7 @@ const App: React.FC = () => {
         querySnapshot.forEach((doc) => {
           list.push({ ...doc.data() } as Todo);
         });
+        list = sortBy(list, ['createdAt', 'updatedAt']);
         setTodos(list);
       });
   };
@@ -100,6 +102,18 @@ const App: React.FC = () => {
     // let list = [...todos].map((item) => {
     //   if (item.id === id) {
     //     item.trashed = true;
+    //   }
+    //   return item;
+    // });
+    // setTodos(list);
+  };
+
+  const reviveTodo = (id: string) => {
+    reviveTodoById(id);
+
+    // let list = [...todos].map((item) => {
+    //   if (item.id === id) {
+    //     item.trashed = false;
     //   }
     //   return item;
     // });
@@ -157,13 +171,14 @@ const App: React.FC = () => {
           todos,
           addNewTodo,
           deleteTodo,
+          reviveTodo,
           deleteTodoForever,
           renameTodo,
           moveTodo,
           toggleTodoCompleteStatus,
         }}
       >
-        <NavBar email={user ? user.email : null} />
+        <NavBar email={user === undefined ? undefined : user ? user.email : null} />
 
         <div style={{ marginTop: 56 }}>
           <Switch>
