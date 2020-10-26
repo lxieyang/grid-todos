@@ -69,7 +69,7 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
         : !important && !urgent
         ? colors.FourthQuadrant
         : undefined;
-    return α(bgColor, 0.7);
+    return α(bgColor, 0.4);
   };
 
   return (

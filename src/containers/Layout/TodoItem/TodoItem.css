@@ -1,6 +1,6 @@
 :root {
   --quadrant-indictor-border-color: lightgray;
-  --quadrant-indictor-background-color: rgba(211, 211, 211, 0.295);
+  --quadrant-indictor-background-color: rgba(211, 211, 211, 0.24);
 }
 
 .TodoItem {

@@ -36,7 +36,7 @@ const Layout: React.FC = () => {
 
   return (
     <>
-      <Container>
+      <Container fluid="lg">
         <Row>
           <div
             onClick={() => handleToggleList(!showList)}
@@ -54,12 +54,12 @@ const Layout: React.FC = () => {
         </Row>
         <Row>
           {showList && (
-            <Col className="col" xs={{ size: 12, order: 'last' }} md={{ size: 3, order: 'first' }}>
+            <Col className="col" xs={{ size: 12, order: 'last' }} lg={{ size: 3, order: 'first' }}>
               <List />
             </Col>
           )}
 
-          <Col xs={{ size: 12, order: 1 }} md={{ size: showList ? 9 : 12, order: 2 }}>
+          <Col xs={{ size: 12, order: 1 }} lg={{ size: showList ? 9 : 12, order: 2 }}>
             <div className="Row">
               <div className="Label VerticalLabel High">High Urgency</div>
               <div className="SubRow">

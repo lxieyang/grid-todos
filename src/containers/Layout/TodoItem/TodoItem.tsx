@@ -91,7 +91,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
             maxRows={5}
             style={{ resize: 'none', cursor: isDragging ? 'move' : '' }}
           />
-          {/* {fromAllList && ( */}
+
           <div className="QuadrantIndicator" ref={drag}>
             <div className="QuadrantGroup">
               <div
@@ -114,7 +114,6 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
               ></div>
             </div>
           </div>
-          {/* })} */}
         </div>
       </ContextMenuTrigger>
 
