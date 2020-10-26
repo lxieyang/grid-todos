@@ -22,17 +22,6 @@
   margin-top: 4px;
 }
 
-.TodoItem.Completed {
-  text-decoration: line-through;
-  font-style: italic;
-  opacity: 0.5;
-  transition: 0.1s ease-in;
-}
-
-.TodoItem.Completed:hover {
-  opacity: 0.8;
-}
-
 .TodoItem input,
 .TodoItem textarea {
   flex: 1;
@@ -41,10 +30,24 @@
   border: none;
 }
 
+.TodoItem.Completed input,
+.TodoItem.Completed textarea {
+  text-decoration: line-through;
+  font-style: italic;
+  opacity: 0.5;
+  transition: 0.1s ease-in;
+}
+
+.TodoItem.Completed input:hover,
+.TodoItem.Completed textarea:hover {
+  opacity: 0.8;
+}
+
+/* 
 .TodoItem input:focus,
 .TodoItem textarea:focus {
-  /* outline: none; */
-}
+  outline: none;
+} */
 
 .QuadrantIndicator {
   flex-shrink: 0;
