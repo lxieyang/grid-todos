@@ -25,7 +25,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     type: ItemTypes.TODO,
   };
 
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     item: dropItem,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -54,7 +54,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
       submitNewName();
       e.currentTarget.blur();
     }
@@ -79,7 +79,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
       <ContextMenuTrigger id={`${todo.id}-${fromAllList}`} disable={isDragging} holdToDisplay={-1}>
         <div
           className={['TodoItem', todo.completed ? 'Completed' : null].join(' ')}
-          ref={drag}
+          ref={preview}
           style={{ opacity: isDragging ? 0.5 : 1 }}
         >
           <Textarea
@@ -91,30 +91,30 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
             maxRows={5}
             style={{ resize: 'none', cursor: isDragging ? 'move' : '' }}
           />
-          {fromAllList && (
-            <div className="QuadrantIndicator">
-              <div className="QuadrantGroup">
-                <div
-                  className="Quadrant Second"
-                  style={{ backgroundColor: important && urgent ? colors.SecondQuadrant : undefined }}
-                ></div>
-                <div
-                  className="Quadrant First"
-                  style={{ backgroundColor: !important && urgent ? colors.FirstQuadrant : undefined }}
-                ></div>
-              </div>
-              <div className="QuadrantGroup">
-                <div
-                  className="Quadrant Third"
-                  style={{ backgroundColor: important && !urgent ? colors.ThirdQuadrant : undefined }}
-                ></div>
-                <div
-                  className="Quadrant Fourth"
-                  style={{ backgroundColor: !important && !urgent ? colors.FourthQuadrant : undefined }}
-                ></div>
-              </div>
+          {/* {fromAllList && ( */}
+          <div className="QuadrantIndicator" ref={drag}>
+            <div className="QuadrantGroup">
+              <div
+                className="Quadrant Second"
+                style={{ backgroundColor: important && urgent ? colors.SecondQuadrant : undefined }}
+              ></div>
+              <div
+                className="Quadrant First"
+                style={{ backgroundColor: !important && urgent ? colors.FirstQuadrant : undefined }}
+              ></div>
             </div>
-          )}
+            <div className="QuadrantGroup">
+              <div
+                className="Quadrant Third"
+                style={{ backgroundColor: important && !urgent ? colors.ThirdQuadrant : undefined }}
+              ></div>
+              <div
+                className="Quadrant Fourth"
+                style={{ backgroundColor: !important && !urgent ? colors.FourthQuadrant : undefined }}
+              ></div>
+            </div>
+          </div>
+          {/* })} */}
         </div>
       </ContextMenuTrigger>
 
