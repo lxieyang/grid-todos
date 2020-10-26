@@ -18,7 +18,14 @@ interface Props {
 }
 
 const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
-  const { renameTodo, deleteTodo, reviveTodo, toggleTodoCompleteStatus, deleteTodoForever } = useContext(TodosContext);
+  const {
+    renameTodo,
+    deleteTodo,
+    reviveTodo,
+    toggleTodoCompleteStatus,
+    deleteTodoForever,
+    toggleTodoIsForTodayStatus,
+  } = useContext(TodosContext);
 
   let dropItem: DropItem = {
     id: todo.id,
@@ -76,6 +83,10 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     deleteTodoForever(todo.id);
   };
 
+  const handleToday = () => {
+    toggleTodoIsForTodayStatus(todo.id, todo.isForToday);
+  };
+
   const { important, urgent } = todo;
 
   return (
@@ -123,6 +134,9 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
 
       <ContextMenu id={`${todo.id}-${fromAllList}`} hideOnLeave={true}>
         <MenuItem onClick={() => handleComplete()}>{todo.completed ? 'Un-complete' : 'Mark as completed'}</MenuItem>
+        <MenuItem onClick={() => handleToday()}>
+          {todo.isForToday ? 'Mark as NOT for today' : 'Mark as for today'}
+        </MenuItem>
         <MenuItem divider />
         <MenuItem onClick={() => handleDelete()} className="delete">
           {todo.trashed ? 'Un-trash' : 'Trash'}

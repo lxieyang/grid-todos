@@ -65,11 +65,11 @@ const Layout: React.FC = () => {
               <div className="SubRow">
                 <div className="BlockWrapper">
                   <div className="Label HorizontalLabel High">High Importance</div>
-                  <Block important={true} urgent={true} />
+                  <Block important={true} urgent={true} isTodayView={true} />
                 </div>
                 <div className="BlockWrapper">
                   <div className="Label HorizontalLabel Low">Low Importance</div>
-                  <Block important={false} urgent={true} />
+                  <Block important={false} urgent={true} isTodayView={true} />
                 </div>
               </div>
             </div>
@@ -78,10 +78,10 @@ const Layout: React.FC = () => {
               <div className="Label VerticalLabel Low">Low Urgency</div>
               <div className="SubRow">
                 <div className="BlockWrapper">
-                  <Block important={true} urgent={false} />
+                  <Block important={true} urgent={false} isTodayView={true} />
                 </div>
                 <div className="BlockWrapper">
-                  <Block important={false} urgent={false} />
+                  <Block important={false} urgent={false} isTodayView={true} />
                 </div>
               </div>
             </div>

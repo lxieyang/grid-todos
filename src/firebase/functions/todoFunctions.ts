@@ -22,6 +22,7 @@ export const createNewTodo = (name: string, important: boolean, urgent: boolean)
     trashed: false,
     createdAt: now,
     updatedAt: now,
+    isForToday: true,
   };
 
   const todoRef = db.collection(DB_COLLECTIONS.TODOS).doc(todo.id);
@@ -51,11 +52,12 @@ export const renameTodoById = (id: string, name: string) => {
   });
 };
 
-export const moveTodoById = (id: string, important: boolean, urgent: boolean) => {
+export const moveTodoById = (id: string, important: boolean, urgent: boolean, isForToday?: boolean) => {
   getTodoById(id).update({
     important,
     urgent,
     trashed: false,
+    isForToday: isForToday !== undefined ? isForToday : false,
   });
 };
 
@@ -73,4 +75,10 @@ export const toggleTodoCompleteStatusById = (id: string, from: boolean) => {
       completedAt: firebase.firestore.FieldValue.delete(),
     });
   }
+};
+
+export const toggleTodoIsForTodayStatusById = (id: string, from: boolean) => {
+  getTodoById(id).update({
+    isForToday: !from,
+  });
 };

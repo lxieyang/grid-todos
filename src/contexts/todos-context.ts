@@ -8,8 +8,9 @@ const todosContext = createContext({
   reviveTodo: (id: string) => {},
   deleteTodoForever: (id: string) => {},
   renameTodo: (id: string, newName: string) => {},
-  moveTodo: (id: string, important: boolean, urgent: boolean) => {},
+  moveTodo: (id: string, important: boolean, urgent: boolean, isForToday?: boolean) => {},
   toggleTodoCompleteStatus: (id: string, from: boolean) => {},
+  toggleTodoIsForTodayStatus: (id: string, from: boolean) => {},
 });
 
 export default todosContext;

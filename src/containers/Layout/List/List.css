@@ -8,7 +8,11 @@
   padding: 0px 4px;
 }
 
-.ListLabel.Active {
+.ListLabel.ForToday {
+  background-color: lightskyblue;
+}
+
+.ListLabel.Queued {
   background-color: lightblue;
 }
 

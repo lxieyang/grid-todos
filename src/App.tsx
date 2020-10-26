@@ -21,6 +21,7 @@ import firebase, {
   renameTodoById,
   moveTodoById,
   toggleTodoCompleteStatusById,
+  toggleTodoIsForTodayStatusById,
 } from './firebase';
 
 import './App.css';
@@ -139,8 +140,8 @@ const App: React.FC = () => {
     // setTodos(list);
   };
 
-  const moveTodo = (id: string, important: boolean, urgent: boolean) => {
-    moveTodoById(id, important, urgent);
+  const moveTodo = (id: string, important: boolean, urgent: boolean, isForToday?: boolean) => {
+    moveTodoById(id, important, urgent, isForToday);
 
     // let list = [...todos].map((item) => {
     //   if (item.id === id) {
@@ -164,6 +165,10 @@ const App: React.FC = () => {
     // setTodos(list);
   };
 
+  const toggleTodoIsForTodayStatus = (id: string, from: boolean) => {
+    toggleTodoIsForTodayStatusById(id, from);
+  };
+
   return (
     <>
       <TodosContext.Provider
@@ -176,6 +181,7 @@ const App: React.FC = () => {
           renameTodo,
           moveTodo,
           toggleTodoCompleteStatus,
+          toggleTodoIsForTodayStatus,
         }}
       >
         <NavBar email={user === undefined ? undefined : user ? user.email : null} />

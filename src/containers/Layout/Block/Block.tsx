@@ -18,13 +18,14 @@ import './Block.css';
 interface Props {
   important: boolean;
   urgent: boolean;
+  isTodayView: boolean;
 }
 
-const Block: React.FC<Props> = ({ important, urgent }: Props) => {
+const Block: React.FC<Props> = ({ important, urgent, isTodayView }: Props) => {
   const { todos, addNewTodo, moveTodo } = useContext(TodosContext);
 
   const handleDrop = (item: DropItem) => {
-    moveTodo(item.id, important, urgent);
+    moveTodo(item.id, important, urgent, isTodayView);
   };
 
   const [{ isOver, canDrop }, drop] = useDrop({
@@ -85,6 +86,12 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
     }
   };
 
+  let list = todos.filter((item) => item.important === important && item.urgent === urgent && !item.trashed);
+
+  if (isTodayView) {
+    list = list.filter((item) => item.isForToday);
+  }
+
   return (
     <div
       ref={drop}
@@ -95,11 +102,9 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
       }}
     >
       <div className="TodoList">
-        {todos
-          .filter((item) => item.important === important && item.urgent === urgent && !item.trashed)
-          .map((item, idx) => {
-            return <TodoItem key={idx} todo={item} fromAllList={false} />;
-          })}
+        {list.map((item, idx) => {
+          return <TodoItem key={idx} todo={item} fromAllList={false} />;
+        })}
       </div>
       <div className="NewTodoContainer">
         <div className="BlockBgTextContainer">

@@ -11,10 +11,16 @@ const List: React.FC = () => {
   const { todos } = useContext(TodosContext);
 
   const activeTodos = todos.filter((item) => !item.trashed);
+  const forTodayTodos = activeTodos.filter((item) => item.isForToday);
+  const queuedTodos = activeTodos.filter((item) => !item.isForToday);
   const trashedTodos = todos.filter((item) => item.trashed);
 
-  const findTodos = (list: Todo[], important: boolean, urgent: boolean) => {
-    return list.filter((item) => item.important === important && item.urgent === urgent);
+  const findTodos = (list: Todo[], important: boolean, urgent: boolean, completed?: boolean) => {
+    list = list.filter((item) => item.important === important && item.urgent === urgent);
+    if (completed !== undefined) {
+      list = list.filter((item) => item.completed === completed);
+    }
+    return list;
   };
 
   const renderTodos = (list: Todo[]): React.ReactNode => {
@@ -29,19 +35,34 @@ const List: React.FC = () => {
 
   return (
     <div className="List">
-      <div className="ListLabel Active">Active</div>
-      {renderTodos(findTodos(activeTodos, true, true))}
-      {renderTodos(findTodos(activeTodos, false, true))}
-      {renderTodos(findTodos(activeTodos, true, false))}
-      {renderTodos(findTodos(activeTodos, false, false))}
+      <div className="ListLabel ForToday">For Today</div>
+      {renderTodos(findTodos(forTodayTodos, true, true, false))}
+      {renderTodos(findTodos(forTodayTodos, true, false, false))}
+      {renderTodos(findTodos(forTodayTodos, false, true, false))}
+      {renderTodos(findTodos(forTodayTodos, false, false, false))}
+      {renderTodos(findTodos(forTodayTodos, true, true, true))}
+      {renderTodos(findTodos(forTodayTodos, true, false, true))}
+      {renderTodos(findTodos(forTodayTodos, false, true, true))}
+      {renderTodos(findTodos(forTodayTodos, false, false, true))}
 
-      {todos.filter((item) => !item.trashed).length === 0 && <div className="NoTodos">no todos</div>}
+      <br />
+      <div className="ListLabel Queued">Queued</div>
+      {renderTodos(findTodos(queuedTodos, true, true, false))}
+      {renderTodos(findTodos(queuedTodos, true, false, false))}
+      {renderTodos(findTodos(queuedTodos, false, true, false))}
+      {renderTodos(findTodos(queuedTodos, false, false, false))}
+      {renderTodos(findTodos(queuedTodos, true, true, true))}
+      {renderTodos(findTodos(queuedTodos, true, false, true))}
+      {renderTodos(findTodos(queuedTodos, false, true, true))}
+      {renderTodos(findTodos(queuedTodos, false, false, true))}
+
+      {activeTodos.length === 0 && <div className="NoTodos">no todos</div>}
 
       <br />
       <div className="ListLabel Trashed">Trashed</div>
       {renderTodos(findTodos(trashedTodos, true, true))}
-      {renderTodos(findTodos(trashedTodos, false, true))}
       {renderTodos(findTodos(trashedTodos, true, false))}
+      {renderTodos(findTodos(trashedTodos, false, true))}
       {renderTodos(findTodos(trashedTodos, false, false))}
     </div>
   );

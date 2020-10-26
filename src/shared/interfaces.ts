@@ -8,6 +8,7 @@ export interface Todo {
   trashed: boolean;
   createdAt: number | string;
   updatedAt: number | string; // update to name or content
+  isForToday: boolean;
 
   order?: number;
   completedAt?: number | string;
