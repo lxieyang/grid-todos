@@ -5,6 +5,7 @@
 
 .ListLabel {
   font-style: italic;
+  padding: 0px 4px;
 }
 
 .ListLabel.Active {
