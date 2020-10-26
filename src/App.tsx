@@ -8,6 +8,7 @@ import Auth from './containers/Auth/Auth';
 
 import { Todo } from './shared/interfaces';
 import TodosContext from './contexts/todos-context';
+import appRoutes from './shared/appRoutes';
 
 import firebase, {
   auth,
@@ -37,7 +38,7 @@ const App: React.FC = () => {
     auth.onAuthStateChanged((user: firebase.User | null) => {
       setUser(user);
       if (user) {
-        history.push('/');
+        history.push(appRoutes.home);
         if (unsubscribeTodos) unsubscribeTodos();
         setUpTodosListener();
       } else {
@@ -188,17 +189,15 @@ const App: React.FC = () => {
 
         <div style={{ marginTop: 56 }}>
           <Switch>
-            <Route path="/auth">
+            <Route path={appRoutes.auth} exact>
               <Auth user={user} />
             </Route>
             {user ? (
-              <>
-                <Route path="/">
-                  <Layout />
-                </Route>
-              </>
+              <Route path={appRoutes.home}>
+                <Layout />
+              </Route>
             ) : (
-              <Redirect to="/auth" />
+              <Redirect to={appRoutes.auth} />
             )}
           </Switch>
         </div>

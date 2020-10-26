@@ -4,6 +4,7 @@ import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, NavbarText } fr
 import moment from 'moment';
 
 import { APP_NAME_FULL } from '../../shared/constants';
+import appRoutes from '../../shared/appRoutes';
 
 import './NavBar.css';
 
@@ -17,7 +18,7 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
 
   return (
     <Navbar color="light" light expand="md" fixed="top">
-      <Link className="navbar-brand" to="/">
+      <Link className="navbar-brand" to={appRoutes.home}>
         {APP_NAME_FULL}
       </Link>
       <NavbarToggler onClick={toggle} />
@@ -25,25 +26,25 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
         <Nav className="mr-auto" navbar>
           {email ? (
             <NavItem>
-              <Link className="nav-link" to="/">
+              <Link className="nav-link" to={appRoutes.home}>
                 Today ({moment().format('MMMM Do, YYYY')})
               </Link>
             </NavItem>
           ) : null}
 
           {/* <NavItem>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to={appRoutes.home}>
               Upcoming
             </Link>
           </NavItem>
           <NavItem>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to={appRoutes.home}>
               History
             </Link>
           </NavItem> */}
         </Nav>
         {email !== undefined && (
-          <Link to="/auth" className="navbar-text">
+          <Link to={appRoutes.auth} className="navbar-text">
             {email ? email : 'Authenticate'}
           </Link>
         )}
