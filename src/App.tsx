@@ -56,9 +56,9 @@ const App: React.FC = () => {
     unsubscribeTodos = db
       .collection(DB_COLLECTIONS.TODOS)
       .where('authorId', '==', getCurrentUser()?.uid)
-      .onSnapshot((querySnapshot) => {
+      .onSnapshot(querySnapshot => {
         let list: Todo[] = [];
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach(doc => {
           list.push({ ...doc.data() } as Todo);
         });
         list = sortBy(list, ['createdAt', 'updatedAt']);
