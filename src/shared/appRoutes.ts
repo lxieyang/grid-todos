@@ -1,4 +1,4 @@
 export default {
   home: '/',
-  auth: 'auth',
+  auth: '/auth',
 };

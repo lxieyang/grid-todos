@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Badge } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
 import moment from 'moment';
 
 import { APP_NAME_FULL } from '../../shared/constants';
@@ -19,6 +20,9 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
   return (
     <Navbar color="light" light expand="md" fixed="top">
       <Link className="navbar-brand" to={appRoutes.home}>
+        <Badge color="primary" pill className="BetaBadge">
+          {/* beta */} β
+        </Badge>
         {APP_NAME_FULL}
       </Link>
       <NavbarToggler onClick={toggle} />

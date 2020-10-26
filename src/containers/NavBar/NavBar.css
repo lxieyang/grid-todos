@@ -1,0 +1,12 @@
+.navbar-brand {
+  position: relative;
+}
+
+.BetaBadge {
+  position: absolute;
+  top: 0;
+  right: -0.8rem;
+  font-size: 0.6rem;
+  font-weight: 300;
+  opacity: 0.9;
+}
