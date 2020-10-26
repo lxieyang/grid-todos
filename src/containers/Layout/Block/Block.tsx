@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useDrop } from 'react-dnd';
+import ordinal from 'ordinal';
 
 import { InputGroup, InputGroupAddon, Button, Input } from 'reactstrap';
 
@@ -58,7 +59,7 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
     }
   };
 
-  const getBackgroundColor = () => {
+  const getBackgroundColor = (): string | undefined => {
     let bgColor =
       important && urgent
         ? colors.SecondQuadrant
@@ -70,6 +71,18 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
         ? colors.FourthQuadrant
         : undefined;
     return α(bgColor, 0.4);
+  };
+
+  const getBackgroundText = (): string => {
+    if (important && urgent) {
+      return 'first'; // ordinal(1);
+    } else if (!important && urgent) {
+      return 'second'; // ordinal(2);
+    } else if (important && !urgent) {
+      return ordinal(3);
+    } else {
+      return 'last';
+    }
   };
 
   return (
@@ -89,6 +102,10 @@ const Block: React.FC<Props> = ({ important, urgent }: Props) => {
           })}
       </div>
       <div className="NewTodoContainer">
+        <div className="BlockBgTextContainer">
+          do <span className="BlockGbTextStrong">{getBackgroundText()}</span>
+        </div>
+
         <InputGroup size="sm">
           <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={handleKeyDown} />
           <InputGroupAddon addonType="append">

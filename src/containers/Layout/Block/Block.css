@@ -18,6 +18,28 @@
   /* border-top: 1px solid rgba(137, 43, 226, 0.274); */
   padding: 8px 0px 2px 0px;
   margin-top: 8px;
+
+  position: relative;
+}
+
+.BlockBgTextContainer {
+  position: absolute;
+  top: -4rem;
+  /* bottom: 0rem; */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+  font-size: 3rem;
+  color: #efefef;
+}
+
+.BlockGbTextStrong {
+  font-weight: bold;
+  margin-left: 0.8rem;
+  color: #dfdfdf;
 }
 
 .NewTodoContainer .AddButton {

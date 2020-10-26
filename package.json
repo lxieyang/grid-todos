@@ -21,6 +21,7 @@
     "firebase": "^7.24.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
+    "ordinal": "^1.0.3",
     "react": "^17.0.1",
     "react-autosize-textarea": "^7.1.0",
     "react-contextmenu": "^2.14.0",
