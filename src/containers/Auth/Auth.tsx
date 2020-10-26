@@ -60,7 +60,7 @@ const Auth: React.FC<Props> = ({ user }: Props) => {
                   id="email"
                   placeholder="johndoe@123.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={e => setEmail(e.target.value)}
                 />
               </FormGroup>
               <FormGroup>
@@ -71,7 +71,7 @@ const Auth: React.FC<Props> = ({ user }: Props) => {
                   id="password"
                   placeholder=""
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={e => setPassword(e.target.value)}
                 />
               </FormGroup>
               <FormGroup>

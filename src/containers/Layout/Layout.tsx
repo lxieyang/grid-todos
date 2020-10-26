@@ -19,7 +19,7 @@ const Layout: React.FC = () => {
     db.collection(DB_COLLECTIONS.USERS)
       .doc(getCurrentUser()?.uid)
       .get()
-      .then((snapshot) => {
+      .then(snapshot => {
         if (snapshot) {
           let shouldShowList = snapshot.data()?.showList;
           setShowList(shouldShowList);

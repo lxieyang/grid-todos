@@ -2,7 +2,7 @@ import { auth, db, DB_COLLECTIONS, getCurrentUser } from '../index';
 
 // https://firebase.google.com/docs/auth/web/password-auth
 export const signUpWithEmailAndPassword = (email: string, password: string) => {
-  return auth.createUserWithEmailAndPassword(email, password).then((result) => {
+  return auth.createUserWithEmailAndPassword(email, password).then(result => {
     if (result) {
       const uid = result.user?.uid;
       db.collection(DB_COLLECTIONS.USERS).doc(uid).set({

@@ -34,7 +34,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
 
   const [{ isDragging }, drag, preview] = useDrag({
     item: dropItem,
-    collect: (monitor) => ({
+    collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -98,7 +98,7 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
           style={{ opacity: isDragging ? 0.5 : 1 }}
         >
           <Textarea
-            onChange={(e) => handleInput(e as React.ChangeEvent<HTMLTextAreaElement>)}
+            onChange={e => handleInput(e as React.ChangeEvent<HTMLTextAreaElement>)}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             value={todoName}

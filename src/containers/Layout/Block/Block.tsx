@@ -31,7 +31,7 @@ const Block: React.FC<Props> = ({ important, urgent, isTodayView }: Props) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: [ItemTypes.TODO],
     drop: handleDrop,
-    collect: (monitor) => ({
+    collect: monitor => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
@@ -86,10 +86,10 @@ const Block: React.FC<Props> = ({ important, urgent, isTodayView }: Props) => {
     }
   };
 
-  let list = todos.filter((item) => item.important === important && item.urgent === urgent && !item.trashed);
+  let list = todos.filter(item => item.important === important && item.urgent === urgent && !item.trashed);
 
   if (isTodayView) {
-    list = list.filter((item) => item.isForToday);
+    list = list.filter(item => item.isForToday);
   }
 
   return (
@@ -112,7 +112,7 @@ const Block: React.FC<Props> = ({ important, urgent, isTodayView }: Props) => {
         </div>
 
         <InputGroup size="sm">
-          <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={handleKeyDown} />
+          <Input value={inputValue} onChange={e => setInputValue(e.target.value)} onKeyDown={handleKeyDown} />
           <InputGroupAddon addonType="append">
             <Button color="secondary" onClick={handleAddTodo}>
               Add

@@ -10,15 +10,15 @@ import './List.css';
 const List: React.FC = () => {
   const { todos } = useContext(TodosContext);
 
-  const activeTodos = todos.filter((item) => !item.trashed);
-  const forTodayTodos = activeTodos.filter((item) => item.isForToday);
-  const queuedTodos = activeTodos.filter((item) => !item.isForToday);
-  const trashedTodos = todos.filter((item) => item.trashed);
+  const activeTodos = todos.filter(item => !item.trashed);
+  const forTodayTodos = activeTodos.filter(item => item.isForToday);
+  const queuedTodos = activeTodos.filter(item => !item.isForToday);
+  const trashedTodos = todos.filter(item => item.trashed);
 
   const findTodos = (list: Todo[], important: boolean, urgent: boolean, completed?: boolean) => {
-    list = list.filter((item) => item.important === important && item.urgent === urgent);
+    list = list.filter(item => item.important === important && item.urgent === urgent);
     if (completed !== undefined) {
-      list = list.filter((item) => item.completed === completed);
+      list = list.filter(item => item.completed === completed);
     }
     return list;
   };
