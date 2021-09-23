@@ -36,18 +36,8 @@ const Layout: React.FC = () => {
     <>
       <Container fluid="lg">
         <Row>
-          <div
-            onClick={() => handleToggleList(!showList)}
-            style={{
-              width: '100%',
-              textAlign: 'right',
-              cursor: 'pointer',
-              fontSize: '0.9rem',
-              fontStyle: 'italic',
-              userSelect: 'none',
-            }}
-          >
-            Toggle List
+          <div onClick={() => handleToggleList(!showList)} className="ToggleListButton">
+            toggle list
           </div>
         </Row>
         <Row>

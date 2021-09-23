@@ -47,3 +47,12 @@
 .Low {
   opacity: 0.5;
 }
+
+.ToggleListButton {
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-style: italic;
+  user-select: none;
+}

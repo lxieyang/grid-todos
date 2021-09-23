@@ -10,8 +10,7 @@ import { Todo } from './shared/interfaces';
 import TodosContext from './contexts/todos-context';
 import appRoutes from './shared/appRoutes';
 
-import { db, auth } from './firebase/init';
-import { DB_COLLECTIONS } from './shared/constants';
+import { auth } from './firebase/init';
 import {
   getCurrentUser,
   todosRef,
@@ -29,9 +28,13 @@ import {
 import { User as FirebaseUser } from 'firebase/auth';
 import { where, onSnapshot, query } from '@firebase/firestore';
 
+import useDarkMode from 'use-dark-mode';
+
 import './App.css';
 
 const App: React.FC = () => {
+  const darkMode = useDarkMode(false);
+
   const history = useHistory();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [user, setUser] = useState<FirebaseUser | null | undefined>(undefined);
@@ -195,7 +198,7 @@ const App: React.FC = () => {
           toggleTodoIsForTodayStatus,
         }}
       >
-        <NavBar email={user === undefined ? undefined : user ? user.email : null} />
+        <NavBar email={user === undefined ? undefined : user ? user.email : null} darkMode={darkMode} />
 
         <div style={{ marginTop: 56 }}>
           <Switch>

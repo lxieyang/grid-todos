@@ -1,0 +1,31 @@
+body {
+  transition: all 0.1s ease-in !important;
+}
+
+body nav {
+  transition: all 0.1s ease-in !important;
+}
+
+body.light-mode {
+  background-color: #fff;
+}
+
+body.dark-mode {
+  background-color: #333;
+}
+
+body.dark-mode .Auth {
+  color: #999;
+}
+
+body.dark-mode .ToggleListButton {
+  color: #666;
+}
+
+body.dark-mode .Row .Label {
+  color: #999;
+}
+
+body.dark-mode nav {
+  background-color: #777 !important;
+}
