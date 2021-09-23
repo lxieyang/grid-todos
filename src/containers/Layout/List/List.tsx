@@ -8,10 +8,9 @@ import TodoItem from '../TodoItem/TodoItem';
 import { AiOutlineClear as ClearIcon } from 'react-icons/ai';
 
 import './List.css';
-import { clearDeletedTodos } from '../../../firebase/functions/todoFunctions';
 
 const List: React.FC = () => {
-  const { todos } = useContext(TodosContext);
+  const { todos, clearDeletedTodos } = useContext(TodosContext);
 
   const activeTodos = todos.filter(item => !item.trashed);
   const forTodayTodos = activeTodos.filter(item => item.isForToday);

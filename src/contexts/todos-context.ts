@@ -7,6 +7,7 @@ const todosContext = createContext({
   deleteTodo: (id: string) => {},
   reviveTodo: (id: string) => {},
   deleteTodoForever: (id: string) => {},
+  clearDeletedTodos: (ids: string[]) => {},
   renameTodo: (id: string, newName: string) => {},
   moveTodo: (id: string, important: boolean, urgent: boolean, isForToday?: boolean) => {},
   toggleTodoCompleteStatus: (id: string, from: boolean) => {},

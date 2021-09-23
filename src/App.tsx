@@ -17,6 +17,7 @@ import {
   todosRef,
   createNewTodo,
   deleteTodoById,
+  clearDeletedTodos,
   reviveTodoById,
   deleteTodoForeverById,
   renameTodoById,
@@ -131,6 +132,12 @@ const App: React.FC = () => {
     // setTodos(list);
   };
 
+  const clearDeletedTodos = (ids: string[]) => {
+    clearDeletedTodos(ids);
+
+    // setTodos([]);
+  };
+
   const renameTodo = (id: string, newName: string) => {
     renameTodoById(id, newName);
 
@@ -181,6 +188,7 @@ const App: React.FC = () => {
           deleteTodo,
           reviveTodo,
           deleteTodoForever,
+          clearDeletedTodos,
           renameTodo,
           moveTodo,
           toggleTodoCompleteStatus,
