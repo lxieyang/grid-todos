@@ -5,7 +5,10 @@ import { Todo } from '../../../shared/interfaces';
 
 import TodoItem from '../TodoItem/TodoItem';
 
+import { AiOutlineClear as ClearIcon } from 'react-icons/ai';
+
 import './List.css';
+import { clearDeletedTodos } from '../../../firebase/functions/todoFunctions';
 
 const List: React.FC = () => {
   const { todos } = useContext(TodosContext);
@@ -33,37 +36,48 @@ const List: React.FC = () => {
     );
   };
 
+  const renderTodosBlockInList = (list: Todo[]): React.ReactNode => {
+    return (
+      <>
+        {renderTodos(findTodos(list, true, true, false))}
+        {renderTodos(findTodos(list, true, false, false))}
+        {renderTodos(findTodos(list, false, true, false))}
+        {renderTodos(findTodos(list, false, false, false))}
+        {renderTodos(findTodos(list, true, true, true))}
+        {renderTodos(findTodos(list, true, false, true))}
+        {renderTodos(findTodos(list, false, true, true))}
+        {renderTodos(findTodos(list, false, false, true))}
+      </>
+    );
+  };
+
   return (
     <div className="List">
       <div className="ListLabel ForToday">For Today</div>
-      {renderTodos(findTodos(forTodayTodos, true, true, false))}
-      {renderTodos(findTodos(forTodayTodos, true, false, false))}
-      {renderTodos(findTodos(forTodayTodos, false, true, false))}
-      {renderTodos(findTodos(forTodayTodos, false, false, false))}
-      {renderTodos(findTodos(forTodayTodos, true, true, true))}
-      {renderTodos(findTodos(forTodayTodos, true, false, true))}
-      {renderTodos(findTodos(forTodayTodos, false, true, true))}
-      {renderTodos(findTodos(forTodayTodos, false, false, true))}
-
+      {renderTodosBlockInList(forTodayTodos)}
+      {forTodayTodos.length === 0 && <div className="NoTodos">no todos</div>}
       <br />
+
       <div className="ListLabel Queued">Queued</div>
-      {renderTodos(findTodos(queuedTodos, true, true, false))}
-      {renderTodos(findTodos(queuedTodos, true, false, false))}
-      {renderTodos(findTodos(queuedTodos, false, true, false))}
-      {renderTodos(findTodos(queuedTodos, false, false, false))}
-      {renderTodos(findTodos(queuedTodos, true, true, true))}
-      {renderTodos(findTodos(queuedTodos, true, false, true))}
-      {renderTodos(findTodos(queuedTodos, false, true, true))}
-      {renderTodos(findTodos(queuedTodos, false, false, true))}
-
-      {activeTodos.length === 0 && <div className="NoTodos">no todos</div>}
-
+      {renderTodosBlockInList(queuedTodos)}
+      {queuedTodos.length === 0 && <div className="NoTodos">no todos</div>}
       <br />
-      <div className="ListLabel Trashed">Trashed</div>
-      {renderTodos(findTodos(trashedTodos, true, true))}
-      {renderTodos(findTodos(trashedTodos, true, false))}
-      {renderTodos(findTodos(trashedTodos, false, true))}
-      {renderTodos(findTodos(trashedTodos, false, false))}
+
+      <div className="ListLabel Trashed">
+        <span style={{ flex: 1 }}>Trashed</span>
+        <ClearIcon
+          style={{
+            cursor: trashedTodos.length > 0 ? 'pointer' : 'not-allowed',
+            opacity: trashedTodos.length === 0 ? '0.2' : undefined,
+          }}
+          onClick={() => {
+            if (trashedTodos.length > 0 && window.confirm('Are you sure?')) {
+              clearDeletedTodos(trashedTodos.map(t => t.id));
+            }
+          }}
+        />
+      </div>
+      {renderTodosBlockInList(trashedTodos)}
     </div>
   );
 };

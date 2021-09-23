@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useDrag } from 'react-dnd';
-import Textarea from 'react-autosize-textarea';
+import Textarea from 'react-textarea-autosize';
 
 import { ItemTypes, DropItem } from '../ItemTypes';
 import { Todo } from '../../../shared/interfaces';
@@ -32,12 +32,13 @@ const TodoItem: React.FC<Props> = ({ todo, fromAllList }: Props) => {
     type: ItemTypes.TODO,
   };
 
-  const [{ isDragging }, drag, preview] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag(() => ({
+    type: dropItem.type,
     item: dropItem,
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
-  });
+  }));
 
   const [todoName, setTodoName] = useState<string>(todo.name);
 

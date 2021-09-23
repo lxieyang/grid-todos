@@ -28,14 +28,14 @@ const Block: React.FC<Props> = ({ important, urgent, isTodayView }: Props) => {
     moveTodo(item.id, important, urgent, isTodayView);
   };
 
-  const [{ isOver, canDrop }, drop] = useDrop({
+  const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: [ItemTypes.TODO],
     drop: handleDrop,
     collect: monitor => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
-  });
+  }));
 
   const isActive = isOver && canDrop;
 
@@ -70,7 +70,7 @@ const Block: React.FC<Props> = ({ important, urgent, isTodayView }: Props) => {
         ? colors.ThirdQuadrant
         : !important && !urgent
         ? colors.FourthQuadrant
-        : undefined;
+        : null;
     return α(bgColor, 0.4);
   };
 

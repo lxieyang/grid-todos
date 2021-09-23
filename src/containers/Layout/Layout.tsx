@@ -5,7 +5,8 @@ import { Container, Row, Col } from 'reactstrap';
 import Block from './Block/Block';
 import List from './List/List';
 
-import { updateListShowStatus, db, DB_COLLECTIONS, getCurrentUser } from '../../firebase';
+import { updateListShowStatus, getCurrentUser, usersRef } from '../../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 import './react-contextmenu.css';
 import './Layout.css';
@@ -16,16 +17,13 @@ const Layout: React.FC = () => {
   );
 
   useEffect(() => {
-    db.collection(DB_COLLECTIONS.USERS)
-      .doc(getCurrentUser()?.uid)
-      .get()
-      .then(snapshot => {
-        if (snapshot) {
-          let shouldShowList = snapshot.data()?.showList;
-          setShowList(shouldShowList);
-          localStorage.setItem('showList', shouldShowList);
-        }
-      });
+    getDoc(doc(usersRef, getCurrentUser()?.uid)).then(snapshot => {
+      if (snapshot) {
+        let shouldShowList = snapshot.data()?.showList;
+        setShowList(shouldShowList);
+        localStorage.setItem('showList', shouldShowList);
+      }
+    });
   }, []);
 
   const handleToggleList = (to: boolean) => {

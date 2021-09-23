@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 
 import { Container, Button, FormGroup, Label, Input } from 'reactstrap';
 
-import firebase, { signInWithEmailAndPassword, signUpWithEmailAndPassword, signOut } from '../../firebase';
+import { signInWithEmailAndPassword, signUpWithEmailAndPassword, signOut } from '../../firebase';
+import { User as FirebaseUser } from 'firebase/auth';
 
 import './Auth.css';
 
 interface Props {
-  user: firebase.User | null | undefined;
+  user: FirebaseUser | null | undefined;
 }
 
 const Auth: React.FC<Props> = ({ user }: Props) => {

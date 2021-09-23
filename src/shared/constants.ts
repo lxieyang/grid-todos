@@ -7,3 +7,8 @@ export const colors = {
   ThirdQuadrant: '#FFDD00', //'#FFFC79',
   FourthQuadrant: '#AAAAAA',
 };
+
+export const DB_COLLECTIONS = {
+  USERS: 'users',
+  TODOS: 'todos',
+};

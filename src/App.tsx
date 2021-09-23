@@ -10,11 +10,11 @@ import { Todo } from './shared/interfaces';
 import TodosContext from './contexts/todos-context';
 import appRoutes from './shared/appRoutes';
 
-import firebase, {
-  auth,
+import { db, auth } from './firebase/init';
+import { DB_COLLECTIONS } from './shared/constants';
+import {
   getCurrentUser,
-  db,
-  DB_COLLECTIONS,
+  todosRef,
   createNewTodo,
   deleteTodoById,
   reviveTodoById,
@@ -25,17 +25,20 @@ import firebase, {
   toggleTodoIsForTodayStatusById,
 } from './firebase';
 
+import { User as FirebaseUser } from 'firebase/auth';
+import { where, onSnapshot, query } from '@firebase/firestore';
+
 import './App.css';
 
 const App: React.FC = () => {
   const history = useHistory();
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [user, setUser] = useState<firebase.User | null | undefined>(undefined);
+  const [user, setUser] = useState<FirebaseUser | null | undefined>(undefined);
 
   let unsubscribeTodos: any = undefined;
 
   useEffect(() => {
-    auth.onAuthStateChanged((user: firebase.User | null) => {
+    auth.onAuthStateChanged((user: FirebaseUser | null) => {
       setUser(user);
       if (user) {
         history.push(appRoutes.home);
@@ -53,17 +56,16 @@ const App: React.FC = () => {
   }, []);
 
   const setUpTodosListener = () => {
-    unsubscribeTodos = db
-      .collection(DB_COLLECTIONS.TODOS)
-      .where('authorId', '==', getCurrentUser()?.uid)
-      .onSnapshot(querySnapshot => {
-        let list: Todo[] = [];
-        querySnapshot.forEach(doc => {
-          list.push({ ...doc.data() } as Todo);
-        });
-        list = sortBy(list, ['createdAt', 'updatedAt']);
-        setTodos(list);
+    const q = query(todosRef, where('authorId', '==', getCurrentUser()?.uid));
+
+    unsubscribeTodos = onSnapshot(q, querySnapshot => {
+      let list: Todo[] = [];
+      querySnapshot.forEach(doc => {
+        list.push({ ...doc.data() } as Todo);
       });
+      list = sortBy(list, ['createdAt', 'updatedAt']);
+      setTodos(list);
+    });
   };
 
   // useEffect(() => {
