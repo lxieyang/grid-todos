@@ -51,7 +51,7 @@ const NavBar: React.FC<Props> = ({ email }: Props) => {
         </Nav>
         {email !== undefined && (
           <Link to={appRoutes.auth} className="navbar-text">
-            {email ? email : 'Authenticate'}
+            {email ? email.split('@')[0] : 'Authenticate'}
           </Link>
         )}
       </Collapse>
